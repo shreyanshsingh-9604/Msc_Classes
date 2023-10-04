@@ -70,7 +70,7 @@
     <section id="contact">
         <h1 class="h-primary center">Contact Us</h1>
         <div id="contact-box">
-            <form action="">
+            <form name="submit-to-google-sheet">
                 <div class="form-group">
                     <label for="name">Name: </label>
                     <input type="text" name="name" id="name" placeholder="Enter your name">
@@ -96,6 +96,18 @@
             Copyright &copy; www.mscclasses.com. All rights reserved!
         </div>
     </footer>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbw7tezBGhlcUlLfpP24L12tSOEWIte_SuAPIZniioXJLI55Wht2k_C2Bsc3AzAWOx-k/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            form.reset()
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
 </body>
 
 </html>
